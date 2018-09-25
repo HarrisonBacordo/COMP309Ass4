@@ -12,7 +12,7 @@ import random
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, roc_curve, roc_auc_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
-from sklearn.preprocessing import Imputer
+from sklearn.preprocessing import Imputer, LabelEncoder
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier
@@ -49,8 +49,8 @@ def load_data():
     Load Data from CSV
     :return: df    a panda data frame
     """
-    df_train = pd.read_csv("../data/part3/adult.data")
-    df_test = pd.read_csv("../data/part3/adult.test", skiprows=[0])
+    df_train = pd.read_csv("../data/part3/adult.data", header=None)
+    df_test = pd.read_csv("../data/part3/adult.test", skiprows=[0], header=None)
     return df_train, df_test
 
 
@@ -74,13 +74,20 @@ def data_preprocess(train, test):
     train_data_full = train_data.copy()
     train_data = train_data.iloc[:, :-1]
     train_labels = train_data_full.iloc[:, -1]
+    encoder = LabelEncoder()
+    train_labels = encoder.fit_transform(train_labels)
 
     test_data_full = test_data.copy()
     test_data = test_data.iloc[:, :-1]
     test_labels = test_data_full.iloc[:, -1]
-    train_data = pd.get_dummies(train_data, columns=train_data.select_dtypes(include='object').columns)
-    test_data = pd.get_dummies(test_data, columns=test_data.select_dtypes(include='object').columns)
+    test_labels = pd.Series(test_labels).astype(str)
+    test_labels = test_labels.str.replace(".", "")
+    test_labels = encoder.transform(test_labels)
+
+    train_data = pd.get_dummies(train_data, columns=train_data.select_dtypes(include=['object']).columns)
+    test_data = pd.get_dummies(test_data, columns=test_data.select_dtypes(include=['object']).columns)
     imputer = Imputer(strategy="median")
+    train_data = train_data.drop(['13_ Holand-Netherlands'], axis=1)
     train_data = pd.DataFrame(imputer.fit_transform(train_data))
     test_data = pd.DataFrame(imputer.transform(test_data))
     # Standardize the inputs
@@ -106,21 +113,21 @@ if __name__ == '__main__':
     # Step 3: Learning Start
     for model in models:
         clf = models[model]
+        print(clf)
         start_time = datetime.datetime.now()  # Track learning starting time
-        clf.fit(train_data.values, train_labels.values)
+        clf.fit(train_data.values, train_labels)
         end_time = datetime.datetime.now()  # Track learning ending time
 
         exection_time = (end_time - start_time).total_seconds()  # Track execution time
         predictions = clf.predict(test_data.values)
 
         # Step 4: Results presentation
-        print(clf)
         print("Learn: execution time={t:.3f} seconds".format(t=exection_time))
 
         # Build baseline model
-        print("ACCURACY:", accuracy_score(test_labels.values, predictions))  # R2 should be maximize
-        print("F1:", f1_score(test_labels.values, predictions))
-        print("PRECISION:", precision_score(test_labels.values, predictions))
-        print("RECALL:", recall_score(test_labels.values, predictions), "\n")
-        print("ROC:", roc_curve(test_labels.values, predictions), "\n")
-        print("ROC_AUC:", roc_auc_score(test_labels.values, predictions), "\n")
+        print("ACCURACY:", accuracy_score(test_labels, predictions))  # R2 should be maximize
+        print("F1:", f1_score(test_labels, predictions))
+        print("PRECISION:", precision_score(test_labels, predictions))
+        print("RECALL:", recall_score(test_labels, predictions))
+        print("ROC:", roc_curve(test_labels, predictions))
+        print("ROC_AUC:", roc_auc_score(test_labels, predictions), "\n")
