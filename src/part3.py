@@ -34,7 +34,7 @@ def load_data():
     Load Data from CSV
     :return: df    a panda data frame
     """
-    df = pd.read_csv("../data/part1/diamonds.csv")
+    df = pd.read_csv("../data/part2/Part2.csv")
     return df
 
 
@@ -54,18 +54,17 @@ def data_preprocess(data):
              test_data_full       test data (full) contains both inputs and labels
     """
     # Split the data into train and test
-    train_data, test_data = train_test_split(data, test_size=train_test_split_test_size, random_state=309)
+    train_data, test_data = train_test_split(data, test_size=train_test_split_test_size)
 
     # Pre-process data (both train and test)
     train_data_full = train_data.copy()
-    train_data = train_data.drop(["price"], axis=1)
-    train_labels = train_data_full["price"]
+    train_data = train_data.drop(["Height"], axis=1)
+    train_labels = train_data_full["Height"]
 
     test_data_full = test_data.copy()
-    test_data = test_data.drop(["price"], axis=1)
-    test_labels = test_data_full["price"]
-    train_data = pd.get_dummies(train_data, columns=['cut', 'color', 'clarity'])
-    test_data = pd.get_dummies(test_data, columns=['cut', 'color', 'clarity'])
+    test_data = test_data.drop(["Height"], axis=1)
+    test_labels = test_data_full["Height"]
+
     # Standardize the inputs
     train_mean = train_data.mean()
     train_std = train_data.std()
