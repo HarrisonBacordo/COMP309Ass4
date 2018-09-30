@@ -1,35 +1,31 @@
-C:\Anaconda\python.exe C:/Projects/PycharmProjects/COMP309Ass4/src/part2.py
 KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
            metric_params=None, n_jobs=1, n_neighbors=5, p=2,
            weights='uniform')
-Learn: execution time=4.542 seconds
-ACCURACY: 0.824150850685
-F1: 0.603407674193
-PRECISION: 0.64571597984
-RECALL: 0.566302652106
-ROC: (array([ 0.        ,  0.09609972,  1.        ]), array([ 0.        ,  0.56630265,  1.        ]), array([2, 1, 0], dtype=int64))
-ROC_AUC: 0.735101466785
+Learn: execution time=57.982 seconds
+ACCURACY: 0.8241508506848474
+F1: 0.6034076741931015
+PRECISION: 0.6457159798399051
+RECALL: 0.5663026521060842
+ROC_AUC: 0.7351014667848474 
 
 GaussianNB(priors=None)
-Learn: execution time=0.091 seconds
-ACCURACY: 0.524967753823
-F1: 0.485155105845
-PRECISION: 0.32605583393
-RECALL: 0.947477899116
-ROC: (array([ 0.        ,  0.60570969,  1.        ]), array([ 0.       ,  0.9474779,  1.       ]), array([2, 1, 0], dtype=int64))
-ROC_AUC: 0.670884104363
+Learn: execution time=0.031 seconds
+ACCURACY: 0.5249677538234753
+F1: 0.48515510584476096
+PRECISION: 0.32605583392984966
+RECALL: 0.9474778991159646
+ROC_AUC: 0.6708841043629681 
 
 SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
   decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
   max_iter=-1, probability=False, random_state=None, shrinking=True,
   tol=0.001, verbose=False)
-Learn: execution time=106.284 seconds
-ACCURACY: 0.851606166697
-F1: 0.645435867332
-PRECISION: 0.74090296496
-RECALL: 0.571762870515
-ROC: (array([ 0.        ,  0.06184158,  1.        ]), array([ 0.        ,  0.57176287,  1.        ]), array([2, 1, 0], dtype=int64))
-ROC_AUC: 0.754960647159
+Learn: execution time=19.306 seconds
+ACCURACY: 0.8515447454087587
+F1: 0.6452370468222515
+PRECISION: 0.7408156386922817
+RECALL: 0.5715028601144045
+ROC_AUC: 0.7548306419590922 
 
 DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
             max_features=None, max_leaf_nodes=None,
@@ -37,13 +33,12 @@ DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
             min_samples_leaf=1, min_samples_split=2,
             min_weight_fraction_leaf=0.0, presort=False, random_state=None,
             splitter='best')
-Learn: execution time=0.523 seconds
-ACCURACY: 0.811866592961
-F1: 0.609161669006
-PRECISION: 0.59809571536
-RECALL: 0.620644825793
-ROC: (array([ 0.        ,  0.12899075,  1.        ]), array([ 0.        ,  0.62064483,  1.        ]), array([2, 1, 0], dtype=int64))
-ROC_AUC: 0.745827036942
+Learn: execution time=0.006 seconds
+ACCURACY: 0.8116823290952644
+F1: 0.6089285714285714
+PRECISION: 0.5976464697045568
+RECALL: 0.6206448257930317
+ROC_AUC: 0.7457064096797889 
 
 RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             max_depth=None, max_features='auto', max_leaf_nodes=None,
@@ -52,23 +47,21 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
             min_weight_fraction_leaf=0.0, n_estimators=10, n_jobs=1,
             oob_score=False, random_state=None, verbose=0,
             warm_start=False)
-Learn: execution time=0.564 seconds
-ACCURACY: 0.845034088815
-F1: 0.635562617362
-PRECISION: 0.714982125447
-RECALL: 0.572022880915
-ROC: (array([ 0.        ,  0.07052674,  1.        ]), array([ 0.        ,  0.57202288,  1.        ]), array([2, 1, 0], dtype=int64))
-ROC_AUC: 0.750748070936
+Learn: execution time=0.035 seconds
+ACCURACY: 0.8449726675265647
+F1: 0.6353655013002022
+PRECISION: 0.7148894668400521
+RECALL: 0.5717628705148206
+ROC_AUC: 0.7506180657358984 
 
 AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None,
           learning_rate=1.0, n_estimators=50, random_state=None)
-Learn: execution time=1.805 seconds
-ACCURACY: 0.860266568393
-F1: 0.673835125448
-PRECISION: 0.751038670502
-RECALL: 0.611024440978
-ROC: (array([ 0.        ,  0.06264576,  1.        ]), array([ 0.        ,  0.61102444,  1.        ]), array([2, 1, 0], dtype=int64))
-ROC_AUC: 0.774189341518
+Learn: execution time=0.095 seconds
+ACCURACY: 0.8602665683926048
+F1: 0.6738351254480287
+PRECISION: 0.7510386705017578
+RECALL: 0.6110244409776391
+ROC_AUC: 0.7741893415181723 
 
 GradientBoostingClassifier(criterion='friedman_mse', init=None,
               learning_rate=0.1, loss='deviance', max_depth=3,
@@ -78,25 +71,23 @@ GradientBoostingClassifier(criterion='friedman_mse', init=None,
               min_weight_fraction_leaf=0.0, n_estimators=100,
               presort='auto', random_state=None, subsample=1.0, verbose=0,
               warm_start=False)
-Learn: execution time=8.920 seconds
-ACCURACY: 0.871260979055
-F1: 0.692036438437
-PRECISION: 0.795608108108
-RECALL: 0.61232449298
-ROC: (array([ 0.      ,  0.048653,  1.      ]), array([ 0.        ,  0.61232449,  1.        ]), array([2, 1, 0], dtype=int64))
-ROC_AUC: 0.781835748701
+Learn: execution time=0.033 seconds
+ACCURACY: 0.8712609790553406
+F1: 0.6920364384366735
+PRECISION: 0.7956081081081081
+RECALL: 0.6123244929797191
+ROC_AUC: 0.7818357487013594 
 
 LinearDiscriminantAnalysis(n_components=None, priors=None, shrinkage=None,
               solver='svd', store_covariance=False, tol=0.0001)
 C:\Anaconda\lib\site-packages\sklearn\discriminant_analysis.py:388: UserWarning: Variables are collinear.
   warnings.warn("Variables are collinear.")
-Learn: execution time=0.601 seconds
-ACCURACY: 0.843805663043
-F1: 0.629893756367
-PRECISION: 0.715371900826
-RECALL: 0.5626625065
-ROC: (array([ 0.        ,  0.06924005,  1.        ]), array([ 0.        ,  0.56266251,  1.        ]), array([2, 1, 0], dtype=int64))
-ROC_AUC: 0.746711229125
+Learn: execution time=0.003 seconds
+ACCURACY: 0.8438056630428107
+F1: 0.629893756367341
+PRECISION: 0.7153719008264463
+RECALL: 0.5626625065002601
+ROC_AUC: 0.7467112291246776 
 
 MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
        beta_2=0.999, early_stopping=False, epsilon=1e-08,
@@ -105,22 +96,20 @@ MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
        nesterovs_momentum=True, power_t=0.5, random_state=None,
        shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
        verbose=False, warm_start=False)
-Learn: execution time=15.544 seconds
-ACCURACY: 0.841963024384
-F1: 0.642489926358
-PRECISION: 0.689943300507
-RECALL: 0.601144045762
-ROC: (array([ 0.        ,  0.08355448,  1.        ]), array([ 0.        ,  0.60114405,  1.        ]), array([2, 1, 0], dtype=int64))
-ROC_AUC: 0.758794781224
+Learn: execution time=0.017 seconds
+ACCURACY: 0.8385848535102266
+F1: 0.6315199102636008
+PRECISION: 0.6853317102860621
+RECALL: 0.5855434217368695
+ROC_AUC: 0.7511955146480889 
 
 LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
           intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
           penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
           verbose=0, warm_start=False)
-Learn: execution time=1.619 seconds
-ACCURACY: 0.852527486027
-F1: 0.657244825125
-PRECISION: 0.728711617601
-RECALL: 0.598543941758
-ROC: (array([ 0.        ,  0.06891838,  1.        ]), array([ 0.        ,  0.59854394,  1.        ]), array([2, 1, 0], dtype=int64))
-ROC_AUC: 0.764812783102
+Learn: execution time=0.002 seconds
+ACCURACY: 0.8525274860266568
+F1: 0.6572448251249109
+PRECISION: 0.7287116176005065
+RECALL: 0.5985439417576703
+ROC_AUC: 0.7648127831023976 

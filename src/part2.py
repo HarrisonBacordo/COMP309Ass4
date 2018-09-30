@@ -12,7 +12,7 @@ import random
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, roc_curve, roc_auc_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
-from sklearn.preprocessing import Imputer, LabelEncoder
+from sklearn.preprocessing import Imputer, LabelEncoder, StandardScaler
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier
@@ -91,10 +91,9 @@ def data_preprocess(train, test):
     train_data = pd.DataFrame(imputer.fit_transform(train_data))
     test_data = pd.DataFrame(imputer.transform(test_data))
     # Standardize the inputs
-    train_mean = train_data.mean()
-    train_std = train_data.std()
-    train_data = (train_data - train_mean) / train_std
-    test_data = (test_data - train_mean) / train_std
+    scaler = StandardScaler()
+    train_data = scaler.fit_transform(train_data)
+    test_data = scaler.transform(test_data)
 
     return train_data, train_labels, test_data, test_labels, train_data_full, test_data_full
 
@@ -114,12 +113,12 @@ if __name__ == '__main__':
     for model in models:
         clf = models[model]
         print(clf)
-        start_time = datetime.datetime.now()  # Track learning starting time
-        clf.fit(train_data.values, train_labels)
-        end_time = datetime.datetime.now()  # Track learning ending time
+        clf.fit(train_data, train_labels)
 
+        start_time = datetime.datetime.now()  # Track learning starting time
+        predictions = clf.predict(test_data)
+        end_time = datetime.datetime.now()  # Track learning ending time
         exection_time = (end_time - start_time).total_seconds()  # Track execution time
-        predictions = clf.predict(test_data.values)
 
         # Step 4: Results presentation
         print("Learn: execution time={t:.3f} seconds".format(t=exection_time))
@@ -129,5 +128,4 @@ if __name__ == '__main__':
         print("F1:", f1_score(test_labels, predictions))
         print("PRECISION:", precision_score(test_labels, predictions))
         print("RECALL:", recall_score(test_labels, predictions))
-        print("ROC:", roc_curve(test_labels, predictions))
         print("ROC_AUC:", roc_auc_score(test_labels, predictions), "\n")

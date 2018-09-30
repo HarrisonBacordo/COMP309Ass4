@@ -17,7 +17,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.svm import SVR, LinearSVR
 from sklearn.neural_network import MLPRegressor
-
+from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
 seed = 309
@@ -28,19 +28,19 @@ train_test_split_test_size = 0.3
 
 # Training settings
 alpha = 0.1  # step size
-max_iters = 100  # max iterations
+max_iters = 1000  # max iterations
 
 models = {
-    "linreg": LinearRegression(),
-    "knn": KNeighborsRegressor(),
-    "ridge": Ridge(),
-    "dtr": DecisionTreeRegressor(),
-    "rfr": RandomForestRegressor(),
-    "gbr": GradientBoostingRegressor(),
-    "sgdr": SGDRegressor(),
-    "svr": SVR(),
-    "linsvr": LinearSVR(),
-    "mlpr": MLPRegressor(),
+    # "linreg": LinearRegression(),
+    # "knn": KNeighborsRegressor(),
+    # "ridge": Ridge(),
+    # "dtr": DecisionTreeRegressor(),
+    # "rfr": RandomForestRegressor(),
+    # "gbr": GradientBoostingRegressor(),
+    # "sgdr": SGDRegressor(),
+    # "svr": SVR(),
+    # "linsvr": LinearSVR(),
+    "mlpr": MLPRegressor(max_iter=max_iters, alpha=alpha),
 }
 
 
@@ -75,29 +75,24 @@ def data_preprocess(data):
     train_data_full = train_data.copy()
     train_data = train_data.drop(["price"], axis=1)
     train_labels = train_data_full["price"]
-
     test_data_full = test_data.copy()
     test_data = test_data.drop(["price"], axis=1)
     test_labels = test_data_full["price"]
+
     train_data = pd.get_dummies(train_data, columns=['cut', 'color', 'clarity'])
     test_data = pd.get_dummies(test_data, columns=['cut', 'color', 'clarity'])
     # Standardize the inputs
-    train_mean = train_data.mean()
-    train_std = train_data.std()
-    train_data = (train_data - train_mean) / train_std
-    test_data = (test_data - train_mean) / train_std
-
-    # Tricks: add dummy intercept to both train and test
-    train_data['intercept_dummy'] = pd.Series(1.0, index=train_data.index)
-    test_data['intercept_dummy'] = pd.Series(1.0, index=test_data.index)
+    scaler = StandardScaler()
+    train_data = scaler.fit_transform(train_data)
+    test_data = scaler.transform(test_data)
+    # train_mean = train_data.mean()
+    # train_std = train_data.std()
+    # train_data = (train_data - train_mean) / train_std
+    # test_data = (test_data - train_mean) / train_std
     return train_data, train_labels, test_data, test_labels, train_data_full, test_data_full
 
 
 if __name__ == '__main__':
-    # Settings
-    metric_type = "MSE"  # MSE, RMSE, MAE, R2
-    optimizer_type = "BGD"  # PSO, BGD
-
     # Step 1: Load Data
     data = load_data()
 
@@ -106,19 +101,17 @@ if __name__ == '__main__':
 
     # Step 3: Learning Start
     for model in models:
-        clf = models[model]
-        start_time = datetime.datetime.now()  # Track learning starting time
-        clf.fit(train_data.values, train_labels.values)
-        end_time = datetime.datetime.now()  # Track learning ending time
+        reg = models[model]
+        reg.fit(train_data, train_labels)
 
-        exection_time = (end_time - start_time).total_seconds()  # Track execution time
-        predictions = clf.predict(test_data.values)
+        start_time = datetime.datetime.now()  # Track learning starting time
+        predictions = reg.predict(test_data)
+        end_time = datetime.datetime.now()  # Track learning ending time
+        execution_time = (end_time - start_time).total_seconds()  # Track execution time
 
         # Step 4: Results presentation
-        print(clf)
-        print("Learn: execution time={t:.3f} seconds".format(t=exection_time))
-
-        # Build baseline model
+        print(reg)
+        print("Learn: execution time={t:.3f} seconds".format(t=execution_time))
         print("R2:", r2_score(test_labels.values, predictions))  # R2 should be maximize
         print("MSE:", mean_squared_error(test_labels.values, predictions))
         print("RMSE:", np.sqrt(mean_squared_error(test_labels.values, predictions)))

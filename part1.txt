@@ -1,40 +1,37 @@
-C:\Anaconda\python.exe C:/Projects/PycharmProjects/COMP309Ass4/src/part1.py
-C:\Anaconda\lib\site-packages\sklearn\ensemble\weight_boosting.py:29: DeprecationWarning: numpy.core.umath_tests is an internal NumPy module and should not be imported. It will be removed in a future NumPy release.
-  from numpy.core.umath_tests import inner1d
 LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
-Learn: execution time=0.028 seconds
-R2: 0.9187730764170751
-MSE: 1317554.099498299
-RMSE: 1147.847594194586
-MAE: 744.4321759665925
+Learn: execution time=0.001 seconds
+R2: 0.9187728834006829
+MSE: 1317557.2303510709
+RMSE: 1147.8489579866643
+MAE: 744.0159682393902 
 
 KNeighborsRegressor(algorithm='auto', leaf_size=30, metric='minkowski',
           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
           weights='uniform')
-Learn: execution time=0.114 seconds
+Learn: execution time=6.136 seconds
 R2: 0.9575987329283284
 MSE: 687776.4267062168
 RMSE: 829.3228724123173
-MAE: 388.3160548757879
+MAE: 388.3160548757879 
 
 Ridge(alpha=1.0, copy_X=True, fit_intercept=True, max_iter=None,
    normalize=False, random_state=None, solver='auto', tol=0.001)
-Learn: execution time=0.013 seconds
-R2: 0.9187727637395791
-MSE: 1317559.1713328406
-RMSE: 1147.8498034729284
-MAE: 744.1330646686426
+Learn: execution time=0.001 seconds
+R2: 0.918772763743859
+MSE: 1317559.1712634165
+RMSE: 1147.8498034426875
+MAE: 744.133061569039 
 
 DecisionTreeRegressor(criterion='mse', max_depth=None, max_features=None,
            max_leaf_nodes=None, min_impurity_decrease=0.0,
            min_impurity_split=None, min_samples_leaf=1,
            min_samples_split=2, min_weight_fraction_leaf=0.0,
            presort=False, random_state=None, splitter='best')
-Learn: execution time=0.211 seconds
-R2: 0.9997673250995618
-MSE: 3774.139846743295
-RMSE: 61.434028410509555
-MAE: 4.17704857248795
+Learn: execution time=0.003 seconds
+R2: 0.9997530655452678
+MSE: 4005.4391916944755
+RMSE: 63.288539181233084
+MAE: 4.258497095538252 
 
 RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
            max_features='auto', max_leaf_nodes=None,
@@ -42,11 +39,11 @@ RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
            min_samples_leaf=1, min_samples_split=2,
            min_weight_fraction_leaf=0.0, n_estimators=10, n_jobs=1,
            oob_score=False, random_state=None, verbose=0, warm_start=False)
-Learn: execution time=1.359 seconds
-R2: 0.9998465686750938
-MSE: 2488.756956494871
-RMSE: 49.88744287388231
-MAE: 4.362791991101229
+Learn: execution time=0.025 seconds
+R2: 0.999835557553329
+MSE: 2667.364590285503
+RMSE: 51.646535123718635
+MAE: 4.459522926708693 
 
 GradientBoostingRegressor(alpha=0.9, criterion='friedman_mse', init=None,
              learning_rate=0.1, loss='ls', max_depth=3, max_features=None,
@@ -55,42 +52,42 @@ GradientBoostingRegressor(alpha=0.9, criterion='friedman_mse', init=None,
              min_samples_split=2, min_weight_fraction_leaf=0.0,
              n_estimators=100, presort='auto', random_state=None,
              subsample=1.0, verbose=0, warm_start=False)
-Learn: execution time=2.295 seconds
-R2: 0.9966885359962018
-MSE: 53714.12311450073
-RMSE: 231.7630753905823
-MAE: 134.90901777760928
+Learn: execution time=0.021 seconds
+R2: 0.996689115992492
+MSE: 53704.71519338137
+RMSE: 231.74277808247095
+MAE: 134.8830434102238 
 
-C:\Anaconda\lib\site-packages\sklearn\linear_model\stochastic_gradient.py:128: FutureWarning: max_iter and tol parameters have been added in <class 'sklearn.linear_model.stochastic_gradient.SGDRegressor'> in 0.19. If both are left unset, they default to max_iter=5 and tol=None. If tol is not None, max_iter defaults to max_iter=1000. From 0.21, default max_iter will be 1000, and default tol will be 1e-3.
-  "and default tol will be 1e-3." % type(self), FutureWarning)
 SGDRegressor(alpha=0.0001, average=False, epsilon=0.1, eta0=0.01,
        fit_intercept=True, l1_ratio=0.15, learning_rate='invscaling',
        loss='squared_loss', max_iter=None, n_iter=None, penalty='l2',
        power_t=0.25, random_state=None, shuffle=True, tol=None, verbose=0,
        warm_start=False)
-Learn: execution time=0.035 seconds
-R2: 0.9165505603421361
-MSE: 1353604.7713269226
-RMSE: 1163.4452162980956
-MAE: 743.4183371818098
+Learn: execution time=0.000 seconds
+R2: 0.9167649446634272
+MSE: 1350127.3166982632
+RMSE: 1161.9497909540942
+MAE: 746.3110712381512 
 
 SVR(C=1.0, cache_size=200, coef0=0.0, degree=3, epsilon=0.1, gamma='auto',
   kernel='rbf', max_iter=-1, shrinking=True, tol=0.001, verbose=False)
-Learn: execution time=71.393 seconds
-R2: 0.3284623449263332
-MSE: 10892782.237486824
-RMSE: 3300.421524212752
-MAE: 1738.3174851588897
+Learn: execution time=17.584 seconds
+R2: 0.32078257369446184
+MSE: 11017353.175587552
+RMSE: 3319.239849059955
+MAE: 1753.602763855744 
 
 LinearSVR(C=1.0, dual=True, epsilon=0.0, fit_intercept=True,
      intercept_scaling=1.0, loss='epsilon_insensitive', max_iter=1000,
      random_state=None, tol=0.0001, verbose=0)
-Learn: execution time=0.063 seconds
-R2: 0.8592783698521463
-MSE: 2282597.3520972244
-RMSE: 1510.8267114719756
-MAE: 792.9787588393882
+Learn: execution time=0.001 seconds
+R2: 0.8521024213468253
+MSE: 2398995.954357741
+RMSE: 1548.8692502460435
+MAE: 802.7599628402295 
 
+C:\Anaconda\lib\site-packages\sklearn\neural_network\multilayer_perceptron.py:564: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (200) reached and the optimization hasn't converged yet.
+  % self.max_iter, ConvergenceWarning)
 MLPRegressor(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
        beta_2=0.999, early_stopping=False, epsilon=1e-08,
        hidden_layer_sizes=(100,), learning_rate='constant',
@@ -98,10 +95,8 @@ MLPRegressor(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
        nesterovs_momentum=True, power_t=0.5, random_state=None,
        shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
        verbose=False, warm_start=False)
-Learn: execution time=16.075 seconds
-R2: 0.9780373547979901
-MSE: 356248.5435287085
-RMSE: 596.8655992170335
-MAE: 316.7155404015007
-
-
+Learn: execution time=0.012 seconds
+R2: 0.9738080621035415
+MSE: 424850.4513907017
+RMSE: 651.8055318810218
+MAE: 339.9445035371332 
