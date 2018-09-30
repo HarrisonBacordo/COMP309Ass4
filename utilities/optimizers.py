@@ -42,6 +42,13 @@ def gradient_descent(y, x, theta, max_iters, alpha, metric_type):
     return thetas, losses
 
 
+def get_batches(x, y, batch_size=50):
+    mini_batches = []
+    for i in range(int(len(y) / batch_size)):
+        mini_batches.append({'x': x[50 * i: 50 * i + 50], 'y': y[50 * i: 50 * i + 50]})
+    return mini_batches
+
+
 def mini_batch_gradient_descent(y, x, theta, max_iters, alpha, metric_type, mini_batch_size):
     """
     Mini Batch Gradient Descent
@@ -58,6 +65,20 @@ def mini_batch_gradient_descent(y, x, theta, max_iters, alpha, metric_type, mini
     losses = []
     thetas = []
     # Please refer to the function "gradient_descent" to implement the mini-batch gradient descent here
+    for i in range(max_iters):
+        # TODO EDIT THIS TO SHUFFLE BOTH X AND Y
+        indx = np.random.permutation(len(y))
+        x, y = x[indx], y[indx]
+        for batch in get_batches(x, y, batch_size=mini_batch_size):
+            gradient = -2 * batch['x'].T.dot(batch['y'] - batch['x'].dot(theta)) / mini_batch_size
+            theta = theta - alpha * gradient
+            loss = compute_loss(batch['y'], batch['x'], theta, metric_type)
+
+            thetas.append(theta)
+            losses.append(loss)
+
+            print("MBGD({bi}/{ti}): loss={l}, w={w}, b={b}".format(
+                bi=i, ti=max_iters - 1, l=loss, w=theta[0], b=theta[1]))
     return thetas, losses
 
 

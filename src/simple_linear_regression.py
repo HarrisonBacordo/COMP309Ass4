@@ -54,15 +54,15 @@ def data_preprocess(data):
              test_data_full       test data (full) contains both inputs and labels
     """
     # Split the data into train and test
-    train_data, test_data = train_test_split(data, test_size=train_test_split_test_size)
+    train_data, test_data = train_test_split(data, test_size = train_test_split_test_size)
 
     # Pre-process data (both train and test)
     train_data_full = train_data.copy()
-    train_data = train_data.drop(["Height"], axis=1)
+    train_data = train_data.drop(["Height"], axis = 1)
     train_labels = train_data_full["Height"]
 
     test_data_full = test_data.copy()
-    test_data = test_data.drop(["Height"], axis=1)
+    test_data = test_data.drop(["Height"], axis = 1)
     test_labels = test_data_full["Height"]
 
     # Standardize the inputs
@@ -72,12 +72,12 @@ def data_preprocess(data):
     test_data = (test_data - train_mean) / train_std
 
     # Tricks: add dummy intercept to both train and test
-    train_data['intercept_dummy'] = pd.Series(1.0, index=train_data.index)
-    test_data['intercept_dummy'] = pd.Series(1.0, index=test_data.index)
+    train_data['intercept_dummy'] = pd.Series(1.0, index = train_data.index)
+    test_data['intercept_dummy'] = pd.Series(1.0, index = test_data.index)
     return train_data, train_labels, test_data, test_labels, train_data_full, test_data_full
 
 
-def learn(y, x, theta, max_iters, alpha, optimizer_type="BGD", metric_type="MSE"):
+def learn(y, x, theta, max_iters, alpha, optimizer_type = "BGD", metric_type = "MSE"):
     """
     Learn to estimate the regression parameters (i.e., w and b)
     :param y:                   train labels
@@ -95,20 +95,20 @@ def learn(y, x, theta, max_iters, alpha, optimizer_type="BGD", metric_type="MSE"
     if optimizer_type == "BGD":
         thetas, losses = gradient_descent(y, x, theta, max_iters, alpha, metric_type)
     elif optimizer_type == "MiniBGD":
-        thetas, losses = mini_batch_gradient_descent(y, x, theta, max_iters, alpha, metric_type, mini_batch_size=10)
+        thetas, losses = mini_batch_gradient_descent(y, x, theta, max_iters, alpha, metric_type, mini_batch_size = 10)
     elif optimizer_type == "PSO":
         thetas, losses = pso(y, x, theta, max_iters, 100, metric_type)
     else:
         raise ValueError(
             "[ERROR] The optimizer '{ot}' is not defined, please double check and re-run your program.".format(
-                ot=optimizer_type))
+                ot = optimizer_type))
     return thetas, losses
 
 
 if __name__ == '__main__':
     # Settings
     metric_type = "MSE"  # MSE, RMSE, MAE, R2
-    optimizer_type = "BGD"  # PSO, BGD
+    optimizer_type = "MiniBGD"  # PSO, BGD
 
     # Step 1: Load Data
     data = load_data()
@@ -117,7 +117,7 @@ if __name__ == '__main__':
     train_data, train_labels, test_data, test_labels, train_data_full, test_data_full = data_preprocess(data)
 
     # Step 3: Learning Start
-    theta = np.zeros(shape=(28,))  # Initialize model parameter
+    theta = np.array([0.0, 0.0])  # Initialize model parameter
 
     start_time = datetime.datetime.now()  # Track learning starting time
     thetas, losses = learn(train_labels.values, train_data.values, theta, max_iters, alpha, optimizer_type, metric_type)
@@ -126,10 +126,14 @@ if __name__ == '__main__':
     exection_time = (end_time - start_time).total_seconds()  # Track execution time
 
     # Step 4: Results presentation
-    print("Learn: execution time={t:.3f} seconds".format(t=exection_time))
+    print("Learn: execution time={t:.3f} seconds".format(t = exection_time))
 
     # Build baseline model
     print("R2:", -compute_loss(test_labels.values, test_data.values, thetas[-1], "R2"))  # R2 should be maximize
     print("MSE:", compute_loss(test_labels.values, test_data.values, thetas[-1], "MSE"))
     print("RMSE:", compute_loss(test_labels.values, test_data.values, thetas[-1], "RMSE"))
     print("MAE:", compute_loss(test_labels.values, test_data.values, thetas[-1], "MAE"))
+
+visualize_test(test_data_full, test_data.values, thetas).show()
+
+
